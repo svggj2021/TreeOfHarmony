@@ -201,7 +201,7 @@ public class BasicPlayer : MonoBehaviour
     /// This function checks the collisions to ignore projectiles ///
     void ignore_collision(GameObject projectile)
     {
-        Physics.IgnoreCollision(projectile.GetComponent<Collider2D>(), playerCollider);
+        Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), playerCollider);
     }
 
     IEnumerator FlyToYourPlace(GameObject gameObject,float duration,Vector3 togo, Action abc)
