@@ -132,13 +132,11 @@ public class BasicPlayer : MonoBehaviour
             if(Input.GetMouseButton(0) && BeatTimer.MeasureTime >= 0)
                 {
                     heldtimecounter += Time.deltaTime;
-                    if (heldtimecounter >= 0.25 * 2)
-                    {
-                        //startscaling;
-                    }
+                 //Jill's scaling part
                 }
             if(Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
                 {
+                    Debug.Log(heldtimecounter);
                     RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar", Mathf.Round(heldtimecounter/0.25f)*0.25f, index));
                     heldtimecounter = 0;
                     timeindex = -1;
