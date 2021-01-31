@@ -57,6 +57,7 @@ public class BasicEnemy : MonoBehaviour
     public PlayerAttacks attack;
 
     public static float timecounter;
+    public InstrumentPlayer enemysampler;
     #endregion
 
     /// Private Variables ///
@@ -125,6 +126,12 @@ public class BasicEnemy : MonoBehaviour
 
                     {
                         spawn_projectile();
+
+                        for(int i=0;i< RecordShootingData.allRecordedData[timeindex].Count;i++)
+                        {
+                            enemysampler.playSound(2, true, RecordShootingData.allRecordedData[timeindex][i].duration, RecordShootingData.allRecordedData[timeindex][i].pitchindex);
+                        }
+                        
                     }
                 }
             }

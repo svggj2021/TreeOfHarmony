@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RecordedData
 {
-    public string instrument;
+    public int instrument;
     public float duration;
     public int pitchindex;
-    public RecordedData(string instrument,
+    public RecordedData(int instrument,
     float duration,int pitchindex)
     {
 

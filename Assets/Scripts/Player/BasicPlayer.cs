@@ -42,7 +42,7 @@ public class BasicPlayer : MonoBehaviour
 
     // Reference to Player camera
     public Camera playerCamera;
-
+    public InstrumentPlayer playersampler;
     //Reference and Assignment of Projectile Spawn Point
     public GameObject projectileSpawnPoint;
 
@@ -198,15 +198,15 @@ public class BasicPlayer : MonoBehaviour
                 }
                 if (Input.GetMouseButton(0) && BeatTimer.MeasureTime >= 0)
                 {
-                    InstrumentPlayer.Instance.playSound(instrumentIndex, true, 2f, index);
+                    playersampler.playSound( true, 2f, index);
                     heldtimecounter += Time.deltaTime;
                     //Jill's scaling part
                 }
                 if (Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
                 {
-                    InstrumentPlayer.Instance.stopSound();
+                      playersampler.stopSound();
                     Debug.Log(heldtimecounter);
-                    RecordShootingData.AddEntry(timeindex, new RecordedData("Guitar", Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
+                    RecordShootingData.AddEntry(timeindex, new RecordedData(InstrumentPlayer.globalinstrumentindex, Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
                     heldtimecounter = 0;
                     timeindex = -1;
                     spawn_projectile();
