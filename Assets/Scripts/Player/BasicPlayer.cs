@@ -30,7 +30,7 @@ public class BasicPlayer : MonoBehaviour
     void get_input()
     {
         float x = Input.GetAxis("Horizontal");
-        float y = Inpt.GetAxis("Vertical");
+        float y = Input.GetAxis("Vertical");
     }
 
     void get_movement(Vector2 direction)
