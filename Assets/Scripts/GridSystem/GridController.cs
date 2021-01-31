@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 [RequireComponent(typeof(BeatTimer))]
 public class GridController : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class GridController : MonoBehaviour
     public float waititime = 4;
     public GameObject LeftBoundary;
     public GameObject RightBoundary;
-
+    public static Action Reset;
     int MAX_MEASURES = 15;
     int MEASURECOUNT;
 /*    List<GameObject> listOfMeasures=new List<GameObject>();*/
@@ -66,11 +66,12 @@ public class GridController : MonoBehaviour
     }
     public void reset()
     {
+        Reset.Invoke();
         readyToCount = false;
         waitcounter = 0;
         MEASURECOUNT = 0;
-        BeatTimer.MeasureTime = -2;
+        
         inFightSceneMode = false;
-        BasicPlayer.timecounter = 0;
+       
     }
 }

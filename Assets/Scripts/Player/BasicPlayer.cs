@@ -57,8 +57,8 @@ public class BasicPlayer : MonoBehaviour
             can_jump = true;
         }
         //Shooting  ---The fight scene needs to start with player on ground.
-
-        if (GridController.readyToCount)
+        if(GridController.inFightSceneMode)
+        { if (GridController.readyToCount)
         {
             timecounter += Time.deltaTime;
             if (Input.GetMouseButtonDown(0) && BeatTimer.MeasureTime >= 0)
@@ -78,9 +78,15 @@ public class BasicPlayer : MonoBehaviour
                 float vertspacing = MeasureController.LatestMeasure.GetComponent<MeasureController>().vertspacing;
 
                 int index = (int)Mathf.Clamp(Mathf.Round((physicsTarget.position.y-startVerticalPosition) / vertspacing), 0, 12 );
-           
-                GameObject gameobjecttemp = GameObject.Instantiate(Resources.Load<GameObject>("Note"), new Vector3(MeasureController.LatestMeasure.transform.position.x - offset, MeasureController.LatestMeasure.transform.position.y + (index) * vertspacing, MeasureController.LatestMeasure.transform.position.z), Quaternion.identity);
-                       gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
+                Vector3 vectortogoto = new Vector3(MeasureController.LatestMeasure.transform.position.x - offset, MeasureController.LatestMeasure.transform.position.y + (index) * vertspacing, MeasureController.LatestMeasure.transform.position.z);
+                GameObject gameobjecttemp = GameObject.Instantiate(Resources.Load<GameObject>("Note"));
+                gameobjecttemp.transform.position = transform.position;
+   
+
+                StartCoroutine(FlyToYourPlace(gameobjecttemp,0.25f, vectortogoto,()=> {
+                    gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
+                }));
+                       
 
                 RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar",0));
             }
@@ -89,6 +95,7 @@ public class BasicPlayer : MonoBehaviour
         else
         {
             startVerticalPosition = physicsTarget.position.y;
+        }
         }
 
 
@@ -127,5 +134,21 @@ public class BasicPlayer : MonoBehaviour
         {
             physicsTarget.gravityScale = 1.0f;
         }
+    }
+
+    IEnumerator FlyToYourPlace(GameObject gameObject,float duration,Vector3 togo, Action abc)
+    {
+        float localtime = 0;
+        Vector3 startingposition = gameObject.transform.position;
+        while(localtime<duration)
+        {
+            gameObject.transform.position = Vector3.Slerp(startingposition, togo, localtime / duration);
+
+            localtime += Time.deltaTime;
+            yield return null;
+        }
+        gameObject.transform.position = togo;
+        abc.Invoke();
+
     }
 }

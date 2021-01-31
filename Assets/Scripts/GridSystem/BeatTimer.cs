@@ -22,7 +22,10 @@ public class BeatTimer : MonoBehaviour
     
     // Private variable for current time
     private float beat_time;
-
+    private void OnEnable()
+    {
+        GridController.Reset += reset;
+    }
     private void Awake()
     {
         if (TimeSettings.bpm == 0)
@@ -54,5 +57,10 @@ public class BeatTimer : MonoBehaviour
                 
             }
         }
+    }
+    public void reset()
+    {
+        BeatTimer.MeasureTime = -2;
+        BasicPlayer.timecounter = 0;
     }
 }
