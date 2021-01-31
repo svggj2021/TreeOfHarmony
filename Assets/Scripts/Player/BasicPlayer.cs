@@ -78,6 +78,10 @@ public class BasicPlayer : MonoBehaviour
 
     private float startVerticalPosition;
 
+    private float keyUpTime;
+    private float keyDownTime;
+    private float fixedEightthOffset;
+
     #endregion
 
     ///                                              ///
