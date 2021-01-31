@@ -35,29 +35,31 @@ public class InstrumentPlayer : MonoBehaviour
         instrumentIndex = instrumentListIndex;
         if (livePlayingMode == true)
         {
-            if (Input.GetKeyDown("space"))
-            {
+             
                 instrument = instrumentList[instrumentListIndex].GetComponent<InstrumentSampler>();
                 instrument.GetComponents<AudioSource>()[noteIndex].loop = true;
                 instrument.GetComponents<AudioSource>()[noteIndex].Play();
 
                 Debug.Log("Playing Sound: " + instrument.GetComponents<AudioSource>()[noteIndex].clip.name + "\n On Instrument: " + gameObject.name);
-            }
-            if (Input.GetKeyUp("space") || instrument.GetComponents<AudioSource>()[noteIndex].time == playDuration)
-            {
-                //below is necessary to ensure full cleanup of all audio stopping when it should (if you have something that switches instruments in the middle of holding down the fire key then you end up with a never ending loop...this fixes that with the 2 for statments
-                for (int i = 0; i <= 11; i++)
-                {
-                    for (int j = 0; j < instrumentList.Count; j++)
-                    {
-                        instrument = instrumentList[j].GetComponent<InstrumentSampler>();
-                        instrument.GetComponents<AudioSource>()[i].loop = false;
-                        instrument.GetComponents<AudioSource>()[i].Stop();
-                    }
-                }
-            }
+            if (instrument.GetComponents<AudioSource>()[noteIndex].time == playDuration)
+                stopSound();
 
         }
+    }
+
+    public void stopSound()
+    {
+            //below is necessary to ensure full cleanup of all audio stopping when it should (if you have something that switches instruments in the middle of holding down the fire key then you end up with a never ending loop...this fixes that with the 2 for statments
+            for (int i = 0; i <= 11; i++)
+            {
+                for (int j = 0; j < instrumentList.Count; j++)
+                {
+                    instrument = instrumentList[j].GetComponent<InstrumentSampler>();
+                    instrument.GetComponents<AudioSource>()[i].loop = false;
+                    instrument.GetComponents<AudioSource>()[i].Stop();
+                }
+            }
+        
     }
 
     public void NoteIndexKeyCheck()
