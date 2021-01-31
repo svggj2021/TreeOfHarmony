@@ -83,7 +83,7 @@ public class BasicPlayer : MonoBehaviour
     ///                                              ///
     ///     UNITY FUNCTIONS          ///
     ///                                             ///
-    #region Unity Built-In Funcations
+    #region Unity Built-In Functions
 
     void Awake()
     {

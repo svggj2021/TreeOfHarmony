@@ -206,7 +206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
 --- !u!1 &372508517
 GameObject:
@@ -263,7 +263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &751089053 stripped
 GameObject:
@@ -438,6 +438,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 751089053}
+  attackVFX: []
+  projectileSpawnPoint: {fileID: 1213667611494976394}
+  ownCollider: {fileID: 1528856339}
+--- !u!61 &1528856339 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1824030815415152041, guid: 5f0ca1cfe61d658128fdfc936986d4ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1213667611494976393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1797045290
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,6 +823,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f0ca1cfe61d658128fdfc936986d4ad, type: 3}
+--- !u!1 &1213667611494976394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5944686599483249129, guid: 5f0ca1cfe61d658128fdfc936986d4ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1213667611494976393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3231021738457801900
 PrefabInstance:
   m_ObjectHideFlags: 0
