@@ -180,6 +180,7 @@ public class BasicPlayer : MonoBehaviour
 
                     timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
                     //AuidoScript.play
+              
 
                     //starttimer to determine how long note was played
 
@@ -199,11 +200,13 @@ public class BasicPlayer : MonoBehaviour
                 }
                 if (Input.GetMouseButton(0) && BeatTimer.MeasureTime >= 0)
                 {
+                    InstrumentPlayer.Instance.playSound(0, true, 2f, index);
                     heldtimecounter += Time.deltaTime;
                     //Jill's scaling part
                 }
                 if (Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
                 {
+                    InstrumentPlayer.Instance.stopSound();
                     Debug.Log(heldtimecounter);
                     RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar", Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
                     heldtimecounter = 0;
