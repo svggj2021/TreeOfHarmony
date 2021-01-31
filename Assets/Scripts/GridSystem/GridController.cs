@@ -61,7 +61,8 @@ public class GridController : MonoBehaviour
         else
         {
             reset();
-
+            RecordShootingData.MakeCopy();
+            StartCoroutine(startagain());
         }
     }
     public void reset()
@@ -73,5 +74,16 @@ public class GridController : MonoBehaviour
         
         inFightSceneMode = false;
        
+    }
+    public static void restart()
+    {
+        inFightSceneMode = true;
+        readyToCount = true;
+    }
+
+    IEnumerator startagain()
+    {
+        yield return new WaitForSecondsRealtime(4);
+        restart();
     }
 }

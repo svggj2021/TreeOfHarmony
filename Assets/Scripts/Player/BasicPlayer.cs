@@ -178,7 +178,7 @@ public class BasicPlayer : MonoBehaviour
                         gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
                     }));
 
-                    timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
+                     timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
                     //AuidoScript.play
 
                     //starttimer to determine how long note was played
@@ -205,7 +205,7 @@ public class BasicPlayer : MonoBehaviour
                 if (Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
                 {
                     Debug.Log(heldtimecounter);
-                    RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar", Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
+                    RecordShootingData.AddEntry(timeindex, new RecordedData("Guitar", Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
                     heldtimecounter = 0;
                     timeindex = -1;
                     spawn_projectile();

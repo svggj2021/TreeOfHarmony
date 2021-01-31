@@ -62,7 +62,7 @@ public class BeatTimer : MonoBehaviour
   
     public void reset()
     {
-        BeatTimer.MeasureTime = -2;
+        MeasureTime = -2;
         BasicPlayer.timecounter = 0;
     }
 }
