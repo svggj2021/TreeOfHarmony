@@ -22,7 +22,7 @@ public static class RecordShootingData
             m_ShootRecordData[time] = new List<RecordedData>() { data };
         }
 
-        Debug.Log("time: " + time+ " data:" + data.instrument + ", " + data.duration);
+    /*    Debug.Log("time: " + time+ " data:" + data.instrument + ", " + data.duration);*/
 
     }
 }

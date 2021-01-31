@@ -7,6 +7,7 @@ public class BeatTimer : MonoBehaviour
 {
     public static Action<float> beatTime;
     public static float MeasureTime=-2;
+ 
     // Measure is unused at this time
     [Serializable]
     public struct TimerVariables
@@ -58,6 +59,7 @@ public class BeatTimer : MonoBehaviour
             }
         }
     }
+  
     public void reset()
     {
         BeatTimer.MeasureTime = -2;

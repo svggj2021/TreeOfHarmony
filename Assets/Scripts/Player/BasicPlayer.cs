@@ -20,8 +20,8 @@ public class BasicPlayer : MonoBehaviour
     }
 
     // Reference RigidBody
-    public Rigidbody2D physicsTarget;    
-
+    public Rigidbody2D physicsTarget;
+    float timeindex = 0;
     // Expose player stats
     public PlayerStats stats;
     
@@ -31,7 +31,10 @@ public class BasicPlayer : MonoBehaviour
     // Jump boolean
     private bool can_jump;
     public static float timecounter;
+    public float heldtimecounter;
     private float startVerticalPosition;
+
+
     void Update()
     {
         get_input();
@@ -71,35 +74,75 @@ public class BasicPlayer : MonoBehaviour
         { if (GridController.readyToCount)
         {
             timecounter += Time.deltaTime;
+                float fixedEightthOffset = 0.0f;
+                int index = 0;
+            
             if (Input.GetMouseButtonDown(0) && BeatTimer.MeasureTime >= 0)
             {
-
-                timecounter += Time.deltaTime;
+                  
+                /*    Debug.Log("pressed down");*/
 
                 //1/8th of a measure hence 0.25f
                 //divide by 2 because for 2 units -->x so for the visual width of the measure MeasureController.widthOfMeasure --> (x/2)*MeasureController.widthofMeasure
                 //    | is the measure and --- is the wall, so offset is calculated from the wall and back:  <-.(15.7)-----|(14th one)
 
-                float fixedEightthOffset = (Mathf.Round((timecounter - BeatTimer.MeasureTime) / 0.25f) * 0.25f);
+            fixedEightthOffset = (Mathf.Round((timecounter - BeatTimer.MeasureTime) / 0.25f) * 0.25f);
                 float offset = MeasureController.widthOfMeasure *  fixedEightthOffset/ 2f;
+                    float temp = BeatTimer.MeasureTime + fixedEightthOffset;
+               
+                    if ((""+temp)== (""+timeindex))
+                    { return;
+                        
+                    }
+           
 
-
-
+                  
                 float vertspacing = MeasureController.LatestMeasure.GetComponent<MeasureController>().vertspacing;
 
-                int index = (int)Mathf.Clamp(Mathf.Round((physicsTarget.position.y-startVerticalPosition) / vertspacing), 0, 12 );
+                index = (int)Mathf.Clamp(Mathf.Round((physicsTarget.position.y-startVerticalPosition) / vertspacing), 0, 12 );
                 Vector3 vectortogoto = new Vector3(MeasureController.LatestMeasure.transform.position.x - offset, MeasureController.LatestMeasure.transform.position.y + (index) * vertspacing, MeasureController.LatestMeasure.transform.position.z);
+                
                 GameObject gameobjecttemp = GameObject.Instantiate(Resources.Load<GameObject>("Note"));
                 gameobjecttemp.transform.position = transform.position;
-   
+                
 
                 StartCoroutine(FlyToYourPlace(gameobjecttemp,0.25f, vectortogoto,()=> {
                     gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
                 }));
-                       
 
-                RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar",0,index));
-            }
+                    timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
+                    //AuidoScript.play
+
+                    //starttimer to determine how long note was played
+
+                    //As the note is held,scale the notemiddlesprite
+
+                    //AudioScript.stop
+
+                    //add the caps for the sprite
+
+                    //clean the duration to the nearest eighth
+
+                    //store cleaned duration in the recorded data
+
+                    //in playback mode, at the dictionary index value play the instrument assigned, the pitch clip for the amount of duration
+
+
+                }
+            if(Input.GetMouseButton(0) && BeatTimer.MeasureTime >= 0)
+                {
+                    heldtimecounter += Time.deltaTime;
+                    if (heldtimecounter >= 0.25 * 2)
+                    {
+                        //startscaling;
+                    }
+                }
+            if(Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
+                {
+                    RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar", Mathf.Round(heldtimecounter/0.25f)*0.25f, index));
+                    heldtimecounter = 0;
+                    timeindex = -1;
+                }
             
         }
         else
@@ -161,4 +204,17 @@ public class BasicPlayer : MonoBehaviour
         abc.Invoke();
 
     }
+/*    IEnumerator StartCounting(Action<float> a)
+    {
+        counting = true;
+        float counttimer = 0;
+        while (counting)
+        { counttimer += Time.deltaTime;
+            yield return null;
+        }
+
+        a.Invoke(counttimer);
+    }*/
+
+    
 }
