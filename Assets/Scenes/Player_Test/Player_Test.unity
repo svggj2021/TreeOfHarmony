@@ -554,6 +554,11 @@ PrefabInstance:
       propertyPath: stats.verticalForce
       value: 3.23
       objectReference: {fileID: 0}
+    - target: {fileID: 3231021740024898384, guid: f023b3de9404826d6a5e4702ce10e7c4,
+        type: 3}
+      propertyPath: attack.basicAttackDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3231021740024898385, guid: f023b3de9404826d6a5e4702ce10e7c4,
         type: 3}
       propertyPath: m_Mass
