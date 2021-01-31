@@ -31,7 +31,7 @@ public class BasicPlayer : MonoBehaviour
     // Jump boolean
     private bool can_jump;
     public static float timecounter;
-
+    private float startVerticalPosition;
     void Update()
     {
         get_input();
@@ -75,12 +75,19 @@ public class BasicPlayer : MonoBehaviour
 
 
                 float vertspacing = MeasureController.LatestMeasure.GetComponent<MeasureController>().vertspacing;
-                int index = (int)Mathf.Clamp(Mathf.Ceil(physicsTarget.position.y / vertspacing), 0, 12 );
+
+                int index = (int)Mathf.Clamp(Mathf.Round((physicsTarget.position.y-startVerticalPosition) / vertspacing), 0, 12 );
+           
                 GameObject gameobjecttemp = GameObject.Instantiate(Resources.Load<GameObject>("Note"), new Vector3(MeasureController.LatestMeasure.transform.position.x - offset, MeasureController.LatestMeasure.transform.position.y + (index) * vertspacing, MeasureController.LatestMeasure.transform.position.z), Quaternion.identity);
-                   gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
+                       gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
 
 
             }
+            
+        }
+        else
+        {
+            startVerticalPosition = physicsTarget.position.y;
         }
 
 
