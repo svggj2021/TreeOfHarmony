@@ -165,7 +165,6 @@ GameObject:
   - component: {fileID: 1516227046}
   - component: {fileID: 1516227048}
   - component: {fileID: 1516227047}
-  - component: {fileID: 1516227049}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -278,12 +277,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1516227042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9320195544bc313963189b0459e51c, type: 3}
+  m_Script: {fileID: 11500000, guid: d70db0f144897d7469f2737c5ddf7ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeSettings:
-    bpm: 120
-    minutesInSeconds: 60
+  measuretime: 2
+  waititime: 4
+  LeftBoundary: {fileID: 91700013}
+  RightBoundary: {fileID: 1797045290}
 --- !u!114 &1516227048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,26 +293,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1516227042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f7bd5f1fe0f2c4b89cb3f165a34c56, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a9320195544bc313963189b0459e51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  measuretime: 2
-  waititime: 1
-  LeftBoundary: {fileID: 91700013}
-  RightBoundary: {fileID: 1797045290}
---- !u!114 &1516227049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516227042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b24490544cdb44abbb7687dbfcee58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timecounter: 0
+  TimeSettings:
+    bpm: 0
+    minutesInSeconds: 0
 --- !u!1 &1797045290
 GameObject:
   m_ObjectHideFlags: 0

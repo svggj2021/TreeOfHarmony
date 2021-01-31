@@ -70,7 +70,8 @@ public class BasicPlayer : MonoBehaviour
                 //divide by 2 because for 2 units -->x so for the visual width of the measure MeasureController.widthOfMeasure --> (x/2)*MeasureController.widthofMeasure
                 //    | is the measure and --- is the wall, so offset is calculated from the wall and back:  <-.(15.7)-----|(14th one)
 
-                float offset = MeasureController.widthOfMeasure * (Mathf.Round((timecounter - BeatTimer.MeasureTime) / 0.25f) * 0.25f) / 2f;
+                float fixedEightthOffset = (Mathf.Round((timecounter - BeatTimer.MeasureTime) / 0.25f) * 0.25f);
+                float offset = MeasureController.widthOfMeasure *  fixedEightthOffset/ 2f;
 
 
 
@@ -81,7 +82,7 @@ public class BasicPlayer : MonoBehaviour
                 GameObject gameobjecttemp = GameObject.Instantiate(Resources.Load<GameObject>("Note"), new Vector3(MeasureController.LatestMeasure.transform.position.x - offset, MeasureController.LatestMeasure.transform.position.y + (index) * vertspacing, MeasureController.LatestMeasure.transform.position.z), Quaternion.identity);
                        gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
 
-
+                RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar",0));
             }
             
         }

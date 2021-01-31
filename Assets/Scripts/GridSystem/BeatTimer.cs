@@ -23,6 +23,14 @@ public class BeatTimer : MonoBehaviour
     // Private variable for current time
     private float beat_time;
 
+    private void Awake()
+    {
+        if (TimeSettings.bpm == 0)
+            TimeSettings.bpm = 120;
+        if (TimeSettings.minutesInSeconds == 0)
+            TimeSettings.minutesInSeconds = 60;
+    }
+
     void Update()
     {
         update_beat();
