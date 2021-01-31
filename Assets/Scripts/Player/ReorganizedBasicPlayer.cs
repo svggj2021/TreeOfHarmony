@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class BasicPlayer : MonoBehaviour
+public class ReorganizedBasicPlayer : MonoBehaviour
 {
     // Struct containing player stats
     #region Structs
@@ -32,8 +32,6 @@ public class BasicPlayer : MonoBehaviour
     }
     #endregion
 
-    /// Public Variables ///
-    #region  Public Variables
     [Header("Player References")]
     // Reference RigidBody
     public Rigidbody2D physicsTarget;    
@@ -52,11 +50,6 @@ public class BasicPlayer : MonoBehaviour
     // Expose player attacks
     public PlayerAttacks attack;
 
-    public static float timecounter;
-    #endregion
-
-    /// Private Variables ///
-    #region Private Variables
     // Movement direction vector
     private Vector2 move_dir;
 
@@ -72,13 +65,8 @@ public class BasicPlayer : MonoBehaviour
     // Instrument Player Reference
     private InstrumentPlayer ip;
 
+    public static float timecounter;
     private float startVerticalPosition;
-    #endregion
-
-    ///                                              ///
-    ///     UNITY FUNCTIONS          ///
-    ///                                             ///
-    #region Unity Built-In Funcations
 
     void Awake()
     {
@@ -98,12 +86,6 @@ public class BasicPlayer : MonoBehaviour
         apply_movement(move_dir);
         apply_gravity_modifier();
     }
-    #endregion
-
-    ///                                              ///
-    ///     PHYSICS FUNCTIONS      ///
-    ///                                             ///
-    #region  Input Functions
 
     // Get Input Data, use for any input checks
     void get_input()
@@ -127,6 +109,9 @@ public class BasicPlayer : MonoBehaviour
                 timecounter += Time.deltaTime;
                 if (Input.GetMouseButtonDown(0) && BeatTimer.MeasureTime >= 0)
                 {
+                    /// Spawns Notes And attaches to grid ///
+                    spawn_notes();
+                    /*
                     /// Spawns Notes And attaches to grid ///
 
                     timecounter += Time.deltaTime;
@@ -154,7 +139,7 @@ public class BasicPlayer : MonoBehaviour
                         
 
                     RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar",0));
-
+                    */
 
                     /// Spawns Attack Projectile ///
                     spawn_projectile();
@@ -166,7 +151,6 @@ public class BasicPlayer : MonoBehaviour
             }
         }
     }
-    #endregion
 
     ///                                              ///
     ///     PHYSICS FUNCTIONS      ///
