@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class BeatTimer : MonoBehaviour
 {
-    
+    public static Action<float> beatTime;
+    public int measures = 15;
     // Measure is unused at this time
     [Serializable]
     public struct TimerVariables
     {
-        public float measure;
+    
         public float bpm;
         public float minutesInSeconds;
     }
+    int counter = 0;
 
     //Expose Time Variables 
     public TimerVariables TimeSettings;
@@ -29,14 +31,19 @@ public class BeatTimer : MonoBehaviour
     // Checks for a beat ever X seconds
     public void update_beat()
     {
-        if(Time.time > beat_time)
+        if (GridController.readyToCount && counter<measures)
         {
-            beat_time = Time.time + TimeSettings.bpm / TimeSettings.minutesInSeconds;
-            
-            // Call functions here to be executed every X seconds
-            
-            // This is just a debug
-            Debug.Log(Mathf.Round(beat_time) + " Seconds has elapsed");
+            if (Time.time > beat_time)
+            {
+                beat_time = Time.time + TimeSettings.bpm / TimeSettings.minutesInSeconds;
+
+                // Call functions here to be executed every X seconds
+
+                // This is just a debug
+                counter += 1;
+
+                beatTime.Invoke(Mathf.Round(beat_time));
+            }
         }
     }
 }
