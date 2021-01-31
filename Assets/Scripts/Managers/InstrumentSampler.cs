@@ -4,62 +4,29 @@ using UnityEngine;
 
 public class InstrumentSampler : MonoBehaviour
 {
-    public GameObject player;
+    //this script sets up and assigns audio sources to each instrument and assigns the clips as well
 
-    public AudioClip[] drumSamples_standard, drumSamples_electro;
-    public AudioClip[] guitarSamples_distortion, guitarSamples_nylon;
-    public AudioClip[] hornSamples_frenchHorn, hornSamples_TenorSax;
-    public AudioClip[] voiceSamples_heavenlyVoices, voiceSamples_motionVoices;
-    public AudioClip[] windSamples_panFlute, windSamples_expressiveFlute;
+    public GameObject instrument;
+    public List<AudioClip> instrumentSamples = new List<AudioClip>();
+    public List<AudioSource> audioSource;
 
-
-    public AudioSource[] audioSource;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-
-        for (int i = 0; i <= drumSamples_standard.Length; i++)
+        for (int i = 0; i <= instrumentSamples.Count - 1; i++)
         {
-
-            player.AddComponent<AudioSource>();
+            instrument.AddComponent<AudioSource>();
+            instrument.GetComponents<AudioSource>()[i].clip = instrumentSamples[i];
+            instrument.GetComponents<AudioSource>()[i].playOnAwake = false;
         }
-
-
-
-        Debug.Log(player.GetComponents<AudioSource>().Length);
-
-        for (int i = 0; i <= player.GetComponents<AudioSource>().Length + 1; i++)
+        for (int i = 0; i <= instrumentSamples.Count - 1; i++)
         {
-            audioSource[i] = player.GetComponents<AudioSource>()[i];
-            audioSource[i].clip = drumSamples_standard[i];
-
+            audioSource.Add(instrument.GetComponents<AudioSource>()[i]);
+            audioSource[i].clip.LoadAudioData();
         }
-
-
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        StartCoroutine(PlaySequence());
 
-    }
-
-    IEnumerator PlaySequence()
-    {
-        for (int i = 0; i <= audioSource.Length - 1; i++)
-        {
-
-
-            yield return new WaitUntil(() => !audioSource[i].isPlaying);
-            audioSource[i].Play();
-
-
-        }
-
-    }
 }
