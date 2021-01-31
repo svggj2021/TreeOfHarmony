@@ -6,7 +6,7 @@ using UnityEngine;
 public class BeatTimer : MonoBehaviour
 {
     public static Action<float> beatTime;
-    public int measures = 15;
+    public static float MeasureTime=-2;
     // Measure is unused at this time
     [Serializable]
     public struct TimerVariables
@@ -31,7 +31,7 @@ public class BeatTimer : MonoBehaviour
     // Checks for a beat ever X seconds
     public void update_beat()
     {
-        if (GridController.readyToCount && counter<measures)
+        if (GridController.readyToCount)
         {
             if (Time.time > beat_time)
             {
@@ -41,8 +41,9 @@ public class BeatTimer : MonoBehaviour
 
                 // This is just a debug
                 counter += 1;
-
+                MeasureTime += 2;
                 beatTime.Invoke(Mathf.Round(beat_time));
+                
             }
         }
     }

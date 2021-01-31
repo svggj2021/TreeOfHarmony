@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class GridController : MonoBehaviour
 {
-    public static float timecounter;
+
     private static float waitcounter;
-    private static int measurecounter;
+
     public static bool inFightSceneMode=true;
     public static bool readyToCount=false;
     public float measuretime=2;
-    public float waititime = 4000;
+    public float waititime = 4;
     public GameObject LeftBoundary;
     public GameObject RightBoundary;
-    private bool waitover;
-    int measurecount = 3;
-    List<GameObject> listOfMeasures=new List<GameObject>();
+
+    int MAX_MEASURES = 15;
+    int MEASURECOUNT;
+/*    List<GameObject> listOfMeasures=new List<GameObject>();*/
     void Start()
     {
         
@@ -51,9 +52,24 @@ public class GridController : MonoBehaviour
     }
     public void beatCalled(float t)
     {
-        if(readyToCount)
+        if(readyToCount && MEASURECOUNT<MAX_MEASURES)
         {
             SpawnMeasure();
+            MEASURECOUNT++;
         }
+        else
+        {
+            reset();
+
+        }
+    }
+    public void reset()
+    {
+        readyToCount = false;
+        waitcounter = 0;
+        MEASURECOUNT = 0;
+        BeatTimer.MeasureTime = -2;
+        inFightSceneMode = false;
+        BasicPlayer.timecounter = 0;
     }
 }

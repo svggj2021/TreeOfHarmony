@@ -30,6 +30,7 @@ public class BasicPlayer : MonoBehaviour
 
     // Jump boolean
     private bool can_jump;
+    public static float timecounter;
 
     void Update()
     {
@@ -55,6 +56,34 @@ public class BasicPlayer : MonoBehaviour
         {
             can_jump = true;
         }
+        //Shooting
+
+        if (GridController.readyToCount)
+        {
+            timecounter += Time.deltaTime;
+            if (Input.GetMouseButtonDown(0) && BeatTimer.MeasureTime >= 0)
+            {
+
+                timecounter += Time.deltaTime;
+
+                //1/8th of a measure hence 0.25f
+                //divide by 2 because for 2 units -->x so for the visual width of the measure MeasureController.widthOfMeasure --> (x/2)*MeasureController.widthofMeasure
+                //    | is the measure and --- is the wall, so offset is calculated from the wall and back:  <-.(15.7)-----|(14th one)
+
+                float offset = MeasureController.widthOfMeasure * (Mathf.Round((timecounter - BeatTimer.MeasureTime) / 0.25f) * 0.25f) / 2f;
+
+
+
+                float vertspacing = MeasureController.LatestMeasure.GetComponent<MeasureController>().vertspacing;
+                int index = (int)Mathf.Clamp(Mathf.Ceil(physicsTarget.position.y / vertspacing), 0, 12 );
+                GameObject gameobjecttemp = GameObject.Instantiate(Resources.Load<GameObject>("Note"), new Vector3(MeasureController.LatestMeasure.transform.position.x - offset, MeasureController.LatestMeasure.transform.position.y + (index) * vertspacing, MeasureController.LatestMeasure.transform.position.z), Quaternion.identity);
+                   gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
+
+
+            }
+        }
+
+
     }
 
     // Apply Movement
