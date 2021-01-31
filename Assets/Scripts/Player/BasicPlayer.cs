@@ -56,7 +56,7 @@ public class BasicPlayer : MonoBehaviour
         {
             can_jump = true;
         }
-        //Shooting
+        //Shooting  ---The fight scene needs to start with player on ground.
 
         if (GridController.readyToCount)
         {
