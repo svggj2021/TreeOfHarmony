@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BeatTimer : MonoBehaviour
 {
-    
     // Measure is unused at this time
     [Serializable]
     public struct TimerVariables
