@@ -35,11 +35,13 @@ public class BasicPlayer : MonoBehaviour
     /// Public Variables ///
     #region  Public Variables
     [Header("Player References")]
+    
     // Reference RigidBody
-
     public Rigidbody2D physicsTarget;
     float timeindex = 0;
 
+    // Reference to Player camera
+    public Camera playerCamera;
 
     //Reference and Assignment of Projectile Spawn Point
     public GameObject projectileSpawnPoint;
@@ -57,6 +59,7 @@ public class BasicPlayer : MonoBehaviour
     public PlayerAttacks attack;
 
     public static float timecounter;
+    public float heldtimecounter;
     #endregion
 
     /// Private Variables ///
@@ -67,18 +70,13 @@ public class BasicPlayer : MonoBehaviour
     // Jump boolean
     private bool can_jump;
 
-    public float heldtimecounter;
-    private float startVerticalPosition;
-
-
     // Store Current Projectile
     private GameObject current_vfx;
 
     // Attack boolean
     private bool is_attacking;
 
-    // Instrument Player Reference
-    private InstrumentPlayer ip;
+    private float startVerticalPosition;
 
     #endregion
 
@@ -264,21 +262,22 @@ public class BasicPlayer : MonoBehaviour
     }
     #endregion
 
- 
-
-
+    ///                                                   ///
+    ///     PROJECTILE FUNCTIONS      ///
+    ///                                                  ///
+    #region Projectile Functions
     // Spawns bullet projectile
     void spawn_projectile()
-    {
+    {    
         // Internal VFX sdata storage
         GameObject vfx;
 
         // Check to make sure that a spawn point has been assigned and is valid
-        if (projectileSpawnPoint != null)
+        if(projectileSpawnPoint != null)
         {
             // Instance projectile
             vfx = Instantiate(current_vfx, projectileSpawnPoint.transform.position, Quaternion.identity);
-
+            
             // Reference rigid body in projectile and apply for to move it forward
             vfx.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 3, ForceMode2D.Impulse);
             ignore_collision(vfx);
@@ -288,7 +287,15 @@ public class BasicPlayer : MonoBehaviour
             Debug.Log("Missing projectile spawn point");
         }
     }
+    #endregion
 
+    ///                                             ///
+    ///     UTILITY FUNCTIONS       ///
+    ///                                             ///
+    #region Utility Functions
+
+    /// This function checks the collisions to ignore projectiles ///
+    /// In this instance it is used to prevent the projectile from hitting the player ///
     void ignore_collision(GameObject projectile)
     {
         Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), playerCollider);
@@ -308,5 +315,5 @@ public class BasicPlayer : MonoBehaviour
         gameObject.transform.position = togo;
         abc.Invoke();
     }
-
+    #endregion
 }
