@@ -46,16 +46,26 @@ public class BasicPlayer : MonoBehaviour
     // Get Input Data, use for any input checks
     void get_input()
     {
-        // Horizontal Movement
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        move_dir = new Vector2(x,y);
 
-        // Vertical Movement
-        if(Input.GetButtonDown("Jump"))
+        if (!GridController.inFightSceneMode || (GridController.inFightSceneMode && GridController.readyToCount))
+        // Horizontal Movement
         {
-            can_jump = true;
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            move_dir = new Vector2(x, y);
+
+            // Vertical Movement
+            if (Input.GetButtonDown("Jump"))
+            {
+                can_jump = true;
+            }
         }
+        else
+        {
+            move_dir = Vector2.zero;
+        }
+
+      
         //Shooting  ---The fight scene needs to start with player on ground.
         if(GridController.inFightSceneMode)
         { if (GridController.readyToCount)
@@ -88,7 +98,7 @@ public class BasicPlayer : MonoBehaviour
                 }));
                        
 
-                RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar",0));
+                RecordShootingData.AddEntry(BeatTimer.MeasureTime + fixedEightthOffset, new RecordedData("Guitar",0,index));
             }
             
         }
