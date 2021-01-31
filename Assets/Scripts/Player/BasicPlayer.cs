@@ -97,7 +97,7 @@ public class BasicPlayer : MonoBehaviour
 
     void Update()
     {
-        get_input();
+        get_input(2);
     }
 
     void FixedUpdate()
@@ -113,7 +113,7 @@ public class BasicPlayer : MonoBehaviour
     #region  Input Functions
 
     // Get Input Data, use for any input checks
-    void get_input()
+    void get_input(int instrumentIndex)
     {
 
         if (!GridController.inFightSceneMode || (GridController.inFightSceneMode && GridController.readyToCount))
@@ -200,7 +200,7 @@ public class BasicPlayer : MonoBehaviour
                 }
                 if (Input.GetMouseButton(0) && BeatTimer.MeasureTime >= 0)
                 {
-                    InstrumentPlayer.Instance.playSound(0, true, 2f, index);
+                    InstrumentPlayer.Instance.playSound(instrumentIndex, true, 2f, index);
                     heldtimecounter += Time.deltaTime;
                     //Jill's scaling part
                 }
