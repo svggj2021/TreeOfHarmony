@@ -19,7 +19,7 @@ public class InstrumentSampler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         
+
 
         for (int i = 0; i <= drumSamples_standard.Length; i++)
         {
@@ -27,13 +27,15 @@ public class InstrumentSampler : MonoBehaviour
             player.AddComponent<AudioSource>();
         }
 
+
+
         Debug.Log(player.GetComponents<AudioSource>().Length);
 
-        for (int i = 0; i <= player.GetComponents<AudioSource>().Length - 1; i++)
+        for (int i = 0; i <= player.GetComponents<AudioSource>().Length + 1; i++)
         {
             audioSource[i] = player.GetComponents<AudioSource>()[i];
             audioSource[i].clip = drumSamples_standard[i];
-             
+
         }
 
 
@@ -44,19 +46,19 @@ public class InstrumentSampler : MonoBehaviour
     void Update()
     {
         StartCoroutine(PlaySequence());
-         
+
     }
 
     IEnumerator PlaySequence()
     {
         for (int i = 0; i <= audioSource.Length - 1; i++)
         {
-            if (!audioSource[i].isPlaying)
-            {
-                yield return new WaitForSeconds(0.5f);
 
-                audioSource[i].Play();
-            }
+
+            yield return new WaitUntil(() => !audioSource[i].isPlaying);
+            audioSource[i].Play();
+
+
         }
 
     }
