@@ -18,13 +18,14 @@ public class DrumBackingSamplePlayer : MonoBehaviour
         randomIndex = Random.Range(0, drumBackingSamples.Count);
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = drumBackingSamples[randomIndex];
+        playSound();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        playSound();
-        
+ 
     }
 
     public void playSound()

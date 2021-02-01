@@ -129,7 +129,7 @@ public class BasicEnemy : MonoBehaviour
 
                         for(int i=0;i< RecordShootingData.allRecordedData[timeindex].Count;i++)
                         {
-                            enemysampler.playSound(RecordShootingData.allRecordedData[timeindex][i].instrument, true, RecordShootingData.allRecordedData[timeindex][i].duration, RecordShootingData.allRecordedData[timeindex][i].pitchindex);
+                            enemysampler.playSound(RecordShootingData.allRecordedData[timeindex][i].instrument,  RecordShootingData.allRecordedData[timeindex][i].duration, RecordShootingData.allRecordedData[timeindex][i].pitchindex);
                         }
                         
                     }

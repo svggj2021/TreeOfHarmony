@@ -177,12 +177,12 @@ public class BasicPlayer : MonoBehaviour
                     gameobjecttemp.transform.position = transform.position;
 
 
-                    StartCoroutine(FlyToYourPlace(gameobjecttemp, 0.25f, vectortogoto, () => {
+                    StartCoroutine(FlyToYourPlace(gameobjecttemp, 0.05f, vectortogoto, () => {
                         gameobjecttemp.transform.SetParent(MeasureController.LatestMeasure.transform, true);
                     }));
 
                      timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
-                    playersampler.playSound(true, 2f, index);
+                    playersampler.playSound(index);
                     //AuidoScript.play
 
 
@@ -210,7 +210,7 @@ public class BasicPlayer : MonoBehaviour
                 }
                 if (Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
                 {
-                      playersampler.stopSound();
+                        playersampler.stopSound();
                     Debug.Log(heldtimecounter);
                   RecordShootingData.AddEntry(timeindex, new RecordedData(InstrumentPlayer.globalinstrumentindex, Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
                     heldtimecounter = 0;
