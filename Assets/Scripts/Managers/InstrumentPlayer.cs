@@ -23,10 +23,7 @@ public class InstrumentPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     /*   //   NoteIndexKeyCheck();
-        instrument = instrumentList[instrumentIndex].GetComponent<InstrumentSampler>();
-        Debug.Log("Instrument Being Used: " + instrumentIndex + " " + instrument.name);
-        playSound(5, true, 2f, 0);*/
+        NoteIndexKeyCheck();
 
     }
 
