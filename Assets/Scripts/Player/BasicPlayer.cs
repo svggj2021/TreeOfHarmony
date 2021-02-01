@@ -182,8 +182,9 @@ public class BasicPlayer : MonoBehaviour
                     }));
 
                      timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
+                    playersampler.playSound(true, 2f, index);
                     //AuidoScript.play
-              
+
 
                     //starttimer to determine how long note was played
 
@@ -203,7 +204,7 @@ public class BasicPlayer : MonoBehaviour
                 }
                 if (Input.GetMouseButton(0) && BeatTimer.MeasureTime >= 0)
                 {
-                    playersampler.playSound( true, 2f, index);
+                   
                     heldtimecounter += Time.deltaTime;
                     //Jill's scaling part
                 }
@@ -221,8 +222,12 @@ public class BasicPlayer : MonoBehaviour
             else
             {
                 startVerticalPosition = physicsTarget.position.y;
-                index = 0;
+              
             }
+        }
+        else
+        {
+            index = 0;
         }
     }
     #endregion
