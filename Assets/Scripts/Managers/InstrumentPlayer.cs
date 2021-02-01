@@ -91,8 +91,7 @@ public class InstrumentPlayer : MonoBehaviour
             globalinstrumentindex = 7;
         else if (Input.GetKeyDown("8"))
             globalinstrumentindex = 8;
-        else
-            globalinstrumentindex = 1;
+   
       
     }
 
