@@ -81,6 +81,7 @@ public class BasicPlayer : MonoBehaviour
     private float keyUpTime;
     private float keyDownTime;
     private float fixedEightthOffset;
+    int index = 0;
 
     #endregion
 
@@ -144,7 +145,7 @@ public class BasicPlayer : MonoBehaviour
             {
                 timecounter += Time.deltaTime;
                 float fixedEightthOffset = 0.0f;
-                int index = 0;
+                
 
                 if (Input.GetMouseButtonDown(0) && BeatTimer.MeasureTime >= 0)
                 {
@@ -210,7 +211,7 @@ public class BasicPlayer : MonoBehaviour
                 {
                       playersampler.stopSound();
                     Debug.Log(heldtimecounter);
-                    RecordShootingData.AddEntry(timeindex, new RecordedData(InstrumentPlayer.globalinstrumentindex, Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
+                  RecordShootingData.AddEntry(timeindex, new RecordedData(InstrumentPlayer.globalinstrumentindex, Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
                     heldtimecounter = 0;
                     timeindex = -1;
                     spawn_projectile();
@@ -220,6 +221,7 @@ public class BasicPlayer : MonoBehaviour
             else
             {
                 startVerticalPosition = physicsTarget.position.y;
+                index = 0;
             }
         }
     }
