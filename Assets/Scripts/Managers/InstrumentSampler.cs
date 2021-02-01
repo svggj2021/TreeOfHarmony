@@ -18,7 +18,7 @@ public class InstrumentSampler : MonoBehaviour
         for (int i = 0; i <= instrumentSamples.Count - 1; i++)
         {
             instrument.AddComponent<AudioSource>();
-            instrument.GetComponents<AudioSource>()[i].spatialBlend = 0.5f;
+      /*      instrument.GetComponents<AudioSource>()[i].spatialBlend = 0.5f;*/
             instrument.GetComponents<AudioSource>()[i].clip = instrumentSamples[i];
             instrument.GetComponents<AudioSource>()[i].playOnAwake = false;
         }

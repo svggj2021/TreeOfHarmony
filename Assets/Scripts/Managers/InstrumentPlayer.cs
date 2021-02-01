@@ -74,8 +74,9 @@ public class InstrumentPlayer : MonoBehaviour
 
     public void NoteIndexKeyCheck()
     {
-
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown("0"))
+            globalinstrumentindex = 0;
+        else if (Input.GetKeyDown("1"))
             globalinstrumentindex = 1;
         else if (Input.GetKeyDown("2"))
             globalinstrumentindex = 2;
@@ -89,9 +90,7 @@ public class InstrumentPlayer : MonoBehaviour
             globalinstrumentindex = 6;
         else if (Input.GetKeyDown("7"))
             globalinstrumentindex = 7;
-        else if (Input.GetKeyDown("8"))
-            globalinstrumentindex = 8;
-   
+      
       
     }
 
