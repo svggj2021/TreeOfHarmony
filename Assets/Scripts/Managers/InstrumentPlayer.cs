@@ -53,12 +53,12 @@ public class InstrumentPlayer : MonoBehaviour
 
             Debug.Log("Playing Sound: " + instrument.GetComponents<AudioSource>()[noteIndex].clip.name + "\n On Instrument: " + gameObject.name);
             if (instrument.GetComponents<AudioSource>()[noteIndex].time == playDuration)
-                stopSound();
+                stopSound(noteIndex);
 
     }
-    public void stopSound()
+    public void stopSound(int index)
     {
-        instrument.GetComponents<AudioSource>()[noteIndex].Stop();
+        instrument.GetComponents<AudioSource>()[index].Stop();
         //below is necessary to ensure full cleanup of all audio stopping when it should (if you have something that switches instruments in the middle of holding down the fire key then you end up with a never ending loop...this fixes that with the 2 for statments
         /* for (int i = 0; i <= 11; i++)
          {
@@ -74,23 +74,25 @@ public class InstrumentPlayer : MonoBehaviour
 
     public void NoteIndexKeyCheck()
     {
-      
-      if (Input.GetKeyDown("1"))
+
+        if (Input.GetKeyDown("1"))
             globalinstrumentindex = 1;
         else if (Input.GetKeyDown("2"))
-            globalinstrumentindex= 2;
+            globalinstrumentindex = 2;
         else if (Input.GetKeyDown("3"))
             globalinstrumentindex = 3;
         else if (Input.GetKeyDown("4"))
-           globalinstrumentindex = 4;
+            globalinstrumentindex = 4;
         else if (Input.GetKeyDown("5"))
             globalinstrumentindex = 5;
         else if (Input.GetKeyDown("6"))
-           globalinstrumentindex = 6;
+            globalinstrumentindex = 6;
         else if (Input.GetKeyDown("7"))
             globalinstrumentindex = 7;
         else if (Input.GetKeyDown("8"))
             globalinstrumentindex = 8;
+        else
+            globalinstrumentindex = 1;
       
     }
 

@@ -183,6 +183,7 @@ public class BasicPlayer : MonoBehaviour
 
                      timeindex = BeatTimer.MeasureTime + fixedEightthOffset;
                     playersampler.playSound(index);
+                    Debug.Log("sound started");
                     //AuidoScript.play
 
 
@@ -210,7 +211,8 @@ public class BasicPlayer : MonoBehaviour
                 }
                 if (Input.GetMouseButtonUp(0) && BeatTimer.MeasureTime >= 0)
                 {
-                        playersampler.stopSound();
+                    Debug.Log("sound stopped");
+                        playersampler.stopSound(index);
                     Debug.Log(heldtimecounter);
                   RecordShootingData.AddEntry(timeindex, new RecordedData(InstrumentPlayer.globalinstrumentindex, Mathf.Round(heldtimecounter / 0.25f) * 0.25f, index));
                     heldtimecounter = 0;
